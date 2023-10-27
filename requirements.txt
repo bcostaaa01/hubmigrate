@@ -1,0 +1,2 @@
+# set the libraries that are needed by the executable
+pytest
