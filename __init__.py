@@ -1,3 +1,3 @@
-from .library.migration import Migrate
+from .classes.migration import Migrate
 
 print("Hello World!")

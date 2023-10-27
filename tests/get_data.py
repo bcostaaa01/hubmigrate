@@ -1,5 +1,5 @@
-from ..library.migration import Migrate
-from ..library.auth import Auth
+from ..classes.migration import Migrate
+from ..classes.auth import Auth
 from unittest.mock import patch
 
 def test_get_data():
