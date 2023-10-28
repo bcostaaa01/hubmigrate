@@ -11,15 +11,29 @@ class Migrate():
         self.path = f"{self.base_path}/{object_type}"
         self.headers = {"Authorization": f"Bearer { test_access_token if test_access_token else Auth.get_token() }"}
         
+    status_codes = {
+        200,
+        201,
+    }
+        
     def get_data(self, params):
         # get data from path with params
         response = requests.get(self.path, params, headers=self.headers)
         data = response.json()
+        if response in self.status_codes:
+            print(f"Successfully retrieved data from {self.path} 🪃")
+            return data
+        else:
+            print(f"Error retrieving data from {self.path} ❌")
         return data
     
     def post_data(self, data):
         # post data to path
         response = requests.post(self.path, json=data, headers=self.headers)
+        if response in self.status_codes:
+            print(f"Successfully posted data to {self.path} 🎉")
+        else:
+            print(f"Error posting data to {self.path}: {response.text} ❌")  
         return response
     
     def put_data(self, data):
