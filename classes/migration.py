@@ -1,7 +1,6 @@
 # imports
 import requests
-import json
-from .auth import Auth
+from auth import Auth
 
 class Migrate():
     """ Migrate data to HubSpot """
@@ -10,7 +9,7 @@ class Migrate():
         self.hubspot = hubspot
         self.base_path = 'https://api.hubapi.com/crm/v3/objects/'
         self.path = f"{self.base_path}/{object_type}"
-        self.headers = {"Authorization": f"Bearer { test_access_token }"}
+        self.headers = {"Authorization": f"Bearer { test_access_token if test_access_token else Auth.get_token() }"}
         
     def get_data(self, params):
         # get data from path with params
@@ -43,8 +42,3 @@ class Migrate():
             params['offset'] = response.json()['offset']
             has_more = response.json()['hasMore']
         return data
-    
-    
-# migrate = Migrate('contacts', 'config', 'hubspot')
-# migrate_data = migrate.get_data('101')
-# print(migrate_data)
