@@ -38,7 +38,7 @@ class Migrate():
             print(f"Error posting data to {self.path}: {response.status_code} - {response.text} ❌")  
         return response
     
-    def put_data(self, data, id=None):
+    def patch_data(self, data, id=None):
         # put data to path
         url = f"{self.path}/{id}"
         response = requests.patch(url, json=data, headers=self.headers)
@@ -48,13 +48,14 @@ class Migrate():
             print(f"Error putting data to {url} with ID: {id}: {response.status_code} - {response.text} ❌")
         return response
     
-    def delete_data(self):
+    def delete_data(self, id=None):
         # delete data from path
-        response = requests.delete(self.path, headers=self.headers)
+        url = f"{self.path}/{id}"
+        response = requests.delete(url, headers=self.headers)
         if response.status_code in self.status_codes:
-            print(f"Successfully deleted data from {self.path} 🎉")
+            print(f"Successfully deleted data from {url} with ID: {id} 🎉")
         else:
-            print(f"Error deleting data from {self.path}: {response.status_code} - {response.text} ❌")
+            print(f"Error deleting data from {url} with ID: {id}: {response.status_code} - {response.text} ❌")
         return response
     
     def get_all_data(self, path, params):
