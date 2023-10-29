@@ -7,7 +7,7 @@ class Migrate():
     def __init__(self, object_type, config, hubspot, test_access_token=None):
         self.config = config
         self.hubspot = hubspot
-        self.base_path = 'https://api.hubapi.com/crm/v3/objects/'
+        self.base_path = 'https://api.hubapi.com/crm/v3/objects'
         self.path = f"{self.base_path}/{object_type}"
         self.headers = {"Authorization": f"Bearer { test_access_token if test_access_token else Auth.get_token() }"}
         
@@ -38,13 +38,14 @@ class Migrate():
             print(f"Error posting data to {self.path}: {response.status_code} - {response.text} ❌")  
         return response
     
-    def put_data(self, data):
+    def put_data(self, data, id=None):
         # put data to path
-        response = requests.put(self.path, json=data, headers=self.headers)
+        url = f"{self.path}/{id}"
+        response = requests.patch(url, json=data, headers=self.headers)
         if response.status_code in self.status_codes:
-            print(f"Successfully put data to {self.path} 🎉")
+            print(f"Successfully put data to {url} 🎉")
         else:
-            print(f"Error putting data to {self.path}: {response.status_code} - {response.text} ❌")
+            print(f"Error putting data to {url} with ID: {id}: {response.status_code} - {response.text} ❌")
         return response
     
     def delete_data(self):
