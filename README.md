@@ -23,8 +23,6 @@ pip install hubmigrate
 4. Call the `migrate_<object>` method on the `MigrationClient` instance with the object to migrate.
 
 ```python
-from hubmigrate import HubMigrate
-
 from hubmigrate.client import MigrationClient
 import json
 
