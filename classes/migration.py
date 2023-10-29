@@ -1,6 +1,6 @@
 # imports
 import requests
-from auth import Auth
+from .auth import Auth
 
 class Migrate():
     """ Migrate data to HubSpot """
@@ -35,28 +35,29 @@ class Migrate():
         return data
     
     
-    def post_data(self, data):
+    def post_data(self, data, path):
         """ Post data to path 
         
         Arguments:
             data {dict} -- Data to post to path
         """
-        response = requests.post(self.path, json=data, headers=self.headers)
+        url = f"{self.base_path}/{path}"
+        response = requests.post(url, json=data, headers=self.headers)
         if response.status_code in self.status_codes:
-            print(f"Successfully posted data to {self.path} 🎉")
+            print(f"Successfully posted data to {url} 🎉")
         else:
-            print(f"Error posting data to {self.path}: {response.status_code} - {response.text} ❌")  
+            print(f"Error posting data to {url}: {response.status_code} - {response.text} ❌")  
         return response
     
     
-    def patch_data(self, data, id=None):
+    def patch_data(self, data, path, id=None):
         """ Patch data to path 
         
         Arguments:
             data {dict} -- Data to patch to path
             id {str} -- ID of the data to patch
         """
-        url = f"{self.path}/{id}"
+        url = f"{path}/{id}"
         response = requests.patch(url, json=data, headers=self.headers)
         if response.status_code in self.status_codes:
             print(f"Successfully put data to {url} 🎉")
@@ -65,13 +66,13 @@ class Migrate():
         return response
     
     
-    def delete_data(self, id=None):
+    def delete_data(self, path, id=None):
         """ Delete data from path 
         
         Arguments:
             id {str} -- ID of the data to delete
         """
-        url = f"{self.path}/{id}"
+        url = f"{path}/{id}"
         response = requests.delete(url, headers=self.headers)
         if response.status_code in self.status_codes:
             print(f"Successfully deleted data from {url} with ID: {id} 🎉")
