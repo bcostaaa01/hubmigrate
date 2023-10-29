@@ -14,13 +14,15 @@ class Migrate():
     status_codes = {
         200,
         201,
+        202,
+        204
     }
         
     def get_data(self, params):
         # get data from path with params
         response = requests.get(self.path, params, headers=self.headers)
         data = response.json()
-        if response in self.status_codes:
+        if response.status_code in self.status_codes:
             print(f"Successfully retrieved data from {self.path} 🪃")
             return data
         else:
@@ -30,10 +32,10 @@ class Migrate():
     def post_data(self, data):
         # post data to path
         response = requests.post(self.path, json=data, headers=self.headers)
-        if response in self.status_codes:
+        if response.status_code in self.status_codes:
             print(f"Successfully posted data to {self.path} 🎉")
         else:
-            print(f"Error posting data to {self.path}: {response.text} ❌")  
+            print(f"Error posting data to {self.path}: {response.status_code} - {response.text} ❌")  
         return response
     
     def put_data(self, data):

@@ -3,3 +3,4 @@ __pycache__
 classes/test.py
 .env
 classes/sample_contact.json
+classes/sample_company.json
