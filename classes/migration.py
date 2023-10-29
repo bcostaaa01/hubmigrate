@@ -17,9 +17,14 @@ class Migrate():
         202,
         204
     }
+    
         
     def get_data(self, params):
-        # get data from path with params
+        """ Get data from path 
+        
+        Arguments:
+            params {dict} -- Parameters to pass to path
+        """
         response = requests.get(self.path, params, headers=self.headers)
         data = response.json()
         if response.status_code in self.status_codes:
@@ -29,8 +34,13 @@ class Migrate():
             print(f"Error retrieving data from {self.path} ❌")
         return data
     
+    
     def post_data(self, data):
-        # post data to path
+        """ Post data to path 
+        
+        Arguments:
+            data {dict} -- Data to post to path
+        """
         response = requests.post(self.path, json=data, headers=self.headers)
         if response.status_code in self.status_codes:
             print(f"Successfully posted data to {self.path} 🎉")
@@ -38,8 +48,14 @@ class Migrate():
             print(f"Error posting data to {self.path}: {response.status_code} - {response.text} ❌")  
         return response
     
+    
     def patch_data(self, data, id=None):
-        # put data to path
+        """ Patch data to path 
+        
+        Arguments:
+            data {dict} -- Data to patch to path
+            id {str} -- ID of the data to patch
+        """
         url = f"{self.path}/{id}"
         response = requests.patch(url, json=data, headers=self.headers)
         if response.status_code in self.status_codes:
@@ -48,8 +64,13 @@ class Migrate():
             print(f"Error putting data to {url} with ID: {id}: {response.status_code} - {response.text} ❌")
         return response
     
+    
     def delete_data(self, id=None):
-        # delete data from path
+        """ Delete data from path 
+        
+        Arguments:
+            id {str} -- ID of the data to delete
+        """
         url = f"{self.path}/{id}"
         response = requests.delete(url, headers=self.headers)
         if response.status_code in self.status_codes:
@@ -58,8 +79,14 @@ class Migrate():
             print(f"Error deleting data from {url} with ID: {id}: {response.status_code} - {response.text} ❌")
         return response
     
+    
     def get_all_data(self, path, params):
-        # get all data from path with params
+        """ Get all data from a path with params 
+        
+        Arguments:
+            path {str} -- Path to get data from
+            params {dict} -- Parameters to pass to path
+        """
         data = []
         has_more = True
         while has_more:
