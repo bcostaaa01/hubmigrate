@@ -1,6 +1,7 @@
 <!-- Define the README for the hubmigrate module with emojis -->
 # 🦆 hubmigrate
 
+⚠️ still in development + yet to be published on PyPi ⚠️
 <!-- [![PyPI version](https://badge.fury.io/py/hubmigrate.svg)]
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/hubmigrate.svg)]
 [![PyPI - License](https://img.shields.io/pypi/l/hubmigrate.svg)] -->
