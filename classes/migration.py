@@ -45,10 +45,15 @@ class Migrate():
             print(f"Successfully put data to {self.path} 🎉")
         else:
             print(f"Error putting data to {self.path}: {response.status_code} - {response.text} ❌")
+        return response
     
     def delete_data(self):
         # delete data from path
         response = requests.delete(self.path, headers=self.headers)
+        if response.status_code in self.status_codes:
+            print(f"Successfully deleted data from {self.path} 🎉")
+        else:
+            print(f"Error deleting data from {self.path}: {response.status_code} - {response.text} ❌")
         return response
     
     def get_all_data(self, path, params):
