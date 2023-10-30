@@ -10,7 +10,7 @@ class TestMigrateContact(unittest.TestCase):
     @patch('hubmigrate.classes.auth.Auth.get_token', return_value=Auth.get_token())
     def test_migrate_contact(self, mock_auth, mock_post):
         # Create a test contact
-        path = '../classes/sample_contact.json'
+        path = 'sample_contact.json'
         with open(path) as f:
             test_contact = json.load(f)
 
