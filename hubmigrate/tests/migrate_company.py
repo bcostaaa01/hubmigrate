@@ -10,7 +10,7 @@ class TestMigrateCompany(unittest.TestCase):
     @patch('hubmigrate.classes.auth.Auth.get_token', return_value=Auth.get_token())
     def test_migrate_company(self, mock_auth, mock_post):
         # Create a test company
-        path = '../hubmigrate/classes/sample_company.json'
+        path = '../classes/sample_company.json'
         with open(path) as f:
             test_company = json.load(f)
 
