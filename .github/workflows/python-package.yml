@@ -39,4 +39,5 @@ jobs:
       run: pip install -r hubmigrate/requirements.txt
     - name: Test with pytest
       run: |
-        pytest -v hubmigrate/tests/
+        pytest -v hubmigrate/hubmigrate/tests/
+
