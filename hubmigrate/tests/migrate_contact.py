@@ -15,7 +15,7 @@ class TestMigrateContact(unittest.TestCase):
         current_dir = os.path.dirname(os.path.realpath(__file__))
 
         # Define the relative path to your JSON file from the current directory
-        relative_path = 'sample_contact.json'  # Replace with the actual JSON file name
+        relative_path = './sample_contact.json'  # Replace with the actual JSON file name
 
         # Construct the full file path
         json_file_path = os.path.join(current_dir, relative_path)
