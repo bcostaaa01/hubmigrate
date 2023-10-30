@@ -3,6 +3,7 @@ from unittest.mock import Mock, patch
 from hubmigrate.client import MigrationClient
 from ..classes.auth import Auth
 import json
+import os
 
 class TestMigrateCompany(unittest.TestCase):
 
@@ -10,7 +11,15 @@ class TestMigrateCompany(unittest.TestCase):
     @patch('hubmigrate.classes.auth.Auth.get_token', return_value=Auth.get_token())
     def test_migrate_company(self, mock_auth, mock_post):
         # Create a test company
-        path = 'sample_company.json'
+        # Get the path to the current directory of your test script
+        current_dir = os.path.dirname(os.path.realpath(__file__))
+
+        # Define the relative path to your JSON file from the current directory
+        relative_path = 'sample_company.json'  # Replace with the actual JSON file name
+
+        # Construct the full file path
+        json_file_path = os.path.join(current_dir, relative_path)
+        path = json_file_path
         with open(path) as f:
             test_company = json.load(f)
 
