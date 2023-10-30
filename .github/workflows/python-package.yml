@@ -24,9 +24,8 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-        access_token: ${{ secrets.ACCESS_TOKEN }}
-      env:
-        access_token: ${{ secrets.ACCESS_TOKEN }}
+    - name: Set ACCESS_TOKEN in environment
+      run: echo "ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }}" >> $GITHUB_ENV
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip

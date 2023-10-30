@@ -1,5 +1,8 @@
 # import .env file
 from decouple import config
+import os
+
+access_token = os.getenv('ACCESS_TOKEN')
 
 class Auth:
     """ Authenticate with HubSpot """
