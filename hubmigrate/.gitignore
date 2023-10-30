@@ -2,5 +2,5 @@ __pycache__
 .pytest_cache
 classes/test.py
 .env
-classes/sample_contact.json
-classes/sample_company.json
+# classes/sample_contact.json
+# classes/sample_company.json

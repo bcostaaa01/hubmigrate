@@ -1,0 +1,12 @@
+{
+    "firstname": "Karl",
+    "lastname": "van der Wijk",
+    "email": "dummy@email.com",
+    "phone": "123-456-7890",
+    "company": "Company BV",
+    "address": "Street 1",
+    "city": "Amsterdam",
+    "state": "Noord Holland",
+    "zip": "1234 AB",
+    "country": "Nederland"
+}  
