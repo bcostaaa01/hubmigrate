@@ -39,5 +39,8 @@ jobs:
       run: pip install -r hubmigrate/requirements.txt
     - name: Test with pytest
       run: |
-        pytest -v hubmigrate/hubmigrate/tests/
+        coverage run -m pytest -v -s tests/*
+    - name: Generate Coverage Report  
+      run: |  
+        coverage report -m
 
