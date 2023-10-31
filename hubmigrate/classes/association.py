@@ -8,7 +8,7 @@ class Association:
         self.config = config
         self.hubspot = hubspot
         self.base_path = 'https://api.hubapi.com/crm-associations/v1/associations'
-        self.headers = {"Authorization": f"Bearer { Auth.get_token() }"}
+        self.headers = {"Authorization": f"Bearer { test_access_token if test_access_token else Auth.get_token() }"}
         
     
     def associate_records(cls, object1_id, object2_id, definition_id):
