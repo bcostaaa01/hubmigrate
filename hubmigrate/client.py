@@ -1,8 +1,10 @@
 from .classes.migration import Migrate
+from .classes.association import Association
 
 class MigrationClient:
     def __init__(self, config, hubspot):
         self.migrate = Migrate(dict, config, hubspot)
+        self.associate = Association(dict, config, hubspot)
 
 
     # Migrate contacts
@@ -58,4 +60,14 @@ class MigrationClient:
         """
         return self.migrate.delete_data(company_id, 'companies')
     
-
+    
+    # Associate records
+    def associate_records(self, object1_id, object2_id, definition_id):
+        """ Associate two records in HubSpot by their IDs 
+        
+        Arguments:
+            object1_id {str} -- ID of the first object -> example: company ID
+            object2_id {str} -- ID of the second object -> example: contact ID
+            definition_id {str} -- ID of the definition for the type of record association -> example: 2 for company to contact
+        """
+        return Association.associate_records(object1_id, object2_id, definition_id)

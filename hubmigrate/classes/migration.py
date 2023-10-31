@@ -1,6 +1,6 @@
-# imports
 import requests
 from .auth import Auth
+
 
 class Migrate():
     """ Migrate data to HubSpot """
