@@ -39,6 +39,12 @@ jobs:
     - name: Test with pytest
       run: |
         coverage run -m pytest -v -s hubmigrate/tests/*
+        if [ $? -eq 0 ]; then
+            echo "🎉 All tests have passed! 🚀"
+        else
+            echo "❌ Some tests have failed. Please review the results. 😓"
+            exit 1
+        fi
     - name: Generate Coverage Report  
       run: |  
         coverage report -m
