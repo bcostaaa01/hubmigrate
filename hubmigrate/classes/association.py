@@ -8,7 +8,7 @@ class Association:
         self.config = config
         self.hubspot = hubspot
         self.base_path = 'https://api.hubapi.com/crm-associations/v1/associations'
-        self.headers = {"Authorization": f"Bearer { test_access_token if test_access_token else Auth.get_token() }"}
+        self.headers = {"Authorization": f"Bearer { Auth.get_token() }"}
         
     
     def associate_records(cls, object1_id, object2_id, definition_id):
@@ -30,9 +30,7 @@ class Association:
         
         response = requests.put(url, json=payload, headers=cls.headers)
         
-        status_codes = {200, 201, 202, 204}
-        
-        if response.status_code in status_codes:
+        if response.status_code == 204:
             print(f"Successfully associated records {object1_id} and {object2_id} 🎉")
         else:
             print(f"Error associating records {object1_id} and {object2_id}: {response.status_code} - {response.text} ❌")

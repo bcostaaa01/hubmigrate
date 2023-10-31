@@ -9,7 +9,7 @@ class Migrate():
         self.hubspot = hubspot
         self.base_path = 'https://api.hubapi.com/crm/v3/objects'
         self.path = f"{self.base_path}/{object_type}"
-        self.headers = {"Authorization": f"Bearer { test_access_token if test_access_token else Auth.get_token() }"}
+        self.headers = {"Authorization": f"Bearer { Auth.get_token() }"}
         
     status_codes = {
         200,
