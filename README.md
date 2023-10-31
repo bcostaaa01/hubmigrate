@@ -1,13 +1,10 @@
-<!-- Define the README for the hubmigrate module with emojis -->
-# 🦆 hubmigrate
+# hubmigrate 🦆
 
-<!-- [![PyPI version](https://badge.fury.io/py/hubmigrate.svg)]
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/hubmigrate.svg)]
-[![PyPI - License](https://img.shields.io/pypi/l/hubmigrate.svg)] -->
-
-A Python library for migrating data to HubSpot.
+**hubmigrate** is a Python library that simplifies data migration to HubSpot.
 
 ## Installation
+
+You can install **hubmigrate** using pip:
 
 ```bash
 pip install hubmigrate
@@ -22,40 +19,45 @@ pip install hubmigrate
 3. Import the JSON data file to migrate.
 4. Call the `migrate_<object>` method on the `MigrationClient` instance with the object to migrate.
 
-```python
-from hubmigrate import HubMigrate
+### Usage Example
 
+```python
 from hubmigrate.client import MigrationClient
 import json
 
-
+# Create an instance of the MigrationClient class
 client = MigrationClient('config', 'hubspot')
 
-
 def post_company():
-    # Create a test contact
+    # Create a test company
     with open('hubmigrate/classes/sample_company.json') as f:
         company = json.load(f)
     
-    # Migrate the contact to HubSpot
+    # Migrate the company to HubSpot
     response = client.migrate_company({'properties': company})
-    
     
 post_company()
 ```
 
-<!-- ## Contributing
+## 🧰 Available Methods
 
-### Setup
+### ☎️ Migrate Contacts
 
-### Testing
+- `migrate_contact(data)`: Migrate a contact to HubSpot.
+- `update_contact(data, contact_id)`: Update a contact in HubSpot.
+- `delete_contact(contact_id)`: Delete a contact in HubSpot.
 
-### Linting
+### 🏭 Migrate Companies
 
-### Building
+- `migrate_company(data)`: Migrate a company to HubSpot.
+- `update_company(data, company_id)`: Update a company in HubSpot.
+- `delete_company(company_id)`: Delete a company in HubSpot.
 
-### Publishing
+### 🔗 Associate Records
 
-## License -->
+- `associate_records(object1_id, object2_id, definition_id)`: Associate two records in HubSpot by their IDs. This method allows you to create associations between different types of records.
+
+🔐 Make sure to keep your `ACCESS_TOKEN` secure when using this library. Suggestion: store your `ACCESS_TOKEN` in a `.env` file and add it to your `.gitignore` file.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
