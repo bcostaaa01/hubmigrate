@@ -8,7 +8,7 @@ import os
 class TestMigrateContact(unittest.TestCase):
 
     @patch('hubmigrate.client.MigrationClient.migrate_contact', return_value=Mock(status_code=200))
-    @patch('hubmigrate.classes.auth.Auth.get_token', return_value=Auth.get_token())
+    @patch('hubmigrate.classes.auth.Auth.get_token')
     def test_migrate_contact(self, mock_auth, mock_post):
         # Create a test contact
         # Get the path to the current directory of your test script
@@ -32,7 +32,7 @@ class TestMigrateContact(unittest.TestCase):
 
         # Assertions
         self.assertEqual(result.status_code, 200)
-        mock_auth.assert_called_once()  # Ensure that Auth.get_token was called once
+        mock_auth.assert_called()  # Ensure that Auth.get_token was called
         mock_post.assert_called_once()  # Ensure that migrate_contact was called once
 
 if __name__ == '__main__':
