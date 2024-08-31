@@ -2,3 +2,4 @@ pytest
 coverage
 python-decouple
 requests
+pandas

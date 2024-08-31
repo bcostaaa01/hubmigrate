@@ -1,5 +1,7 @@
 import requests
 from .auth import Auth
+import pandas as pd
+import json
 
 
 class Migrate():
@@ -34,19 +36,37 @@ class Migrate():
             print(f"Error retrieving data from {self.path} ❌")
         return data
     
-    
-    def post_data(self, data, path):
+
+    def post_data(self, data, path, data_type='json'):
         """ Post data to path 
         
         Arguments:
-            data {dict} -- Data to post to path
+            data {str or dict} -- Data to post to path (file path for Excel/CSV or dict for JSON)
+            path {str} -- HubSpot API path
+            data_type {str} -- Type of data ('json', 'excel', 'csv')
         """
-        url = f"{self.base_path}/{path}"
-        response = requests.post(url, json=data, headers=self.headers)
-        if response.status_code in self.status_codes:
-            print(f"Successfully posted data to {url} 🎉")
+        if data_type == 'json':
+            if isinstance(data, str):
+                data_list = json.loads(data)
+            else:
+                data_list = data
+        elif data_type == 'excel':
+            df = pd.read_excel(data)
+            data_list = df.to_dict(orient='records')
+        elif data_type == 'csv':
+            df = pd.read_csv(data)
+            data_list = df.to_dict(orient='records')
         else:
-            print(f"Error posting data to {url}: {response.status_code} - {response.text} ❌")  
+            raise ValueError("Unsupported data type. Use 'json', 'excel', or 'csv'.")
+    
+        # Post each record to HubSpot
+        for record in data_list:
+            url = f"{self.base_path}/{path}"
+            response = requests.post(url, json=record, headers=self.headers)
+            if response.status_code in self.status_codes:
+                print(f"Successfully posted data to {url} 🎉")
+            else:
+                print(f"Error posting data to {url}: {response.status_code} - {response.text} ❌")
         return response
     
     
