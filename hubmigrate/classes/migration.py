@@ -9,7 +9,7 @@ class Migrate():
     def __init__(self, object_type, config, hubspot, test_access_token=None):
         self.config = config
         self.hubspot = hubspot
-        self.base_path = 'https://api.hubapi.com/crm/v3/objects'
+        self.base_path = 'https://api.hubapi.com/crm/v3/objects/'
         self.path = f"{self.base_path}/{object_type}"
         self.headers = {"Authorization": f"Bearer { Auth.get_token() }"}
         
@@ -58,13 +58,14 @@ class Migrate():
             data_list = df.to_dict(orient='records')
         else:
             raise ValueError("Unsupported data type. Use 'json', 'excel', or 'csv'.")
+            
     
         # Post each record to HubSpot
         for record in data_list:
             url = f"{self.base_path}/{path}"
             response = requests.post(url, json=record, headers=self.headers)
             if response.status_code in self.status_codes:
-                print(f"Successfully posted data to {url} 🎉")
+                print(f"Successfully posted {record} to {url} 🎉")
             else:
                 print(f"Error posting data to {url}: {response.status_code} - {response.text} ❌")
         return response

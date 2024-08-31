@@ -41,6 +41,7 @@ class MigrationClient:
         Arguments:
             data {dict} -- Data to migrate to HubSpot
         """
+        print(data)
         return self.migrate.post_data(data, 'companies', data_type)
     
     def update_company(self, data, company_id):

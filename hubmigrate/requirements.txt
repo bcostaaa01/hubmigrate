@@ -3,3 +3,4 @@ coverage
 python-decouple
 requests
 pandas
+python-decouple
